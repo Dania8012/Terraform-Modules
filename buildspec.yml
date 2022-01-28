@@ -14,9 +14,7 @@ phases:
       - terraform version
   build:
     commands:
-      - echo initializing terraform ...
-      - pwd
-      - ls -l
+      - echo applying changes to resources ...
       - sh ./${BASE_PATH}/apply_modules.sh
   post_build:
     commands:

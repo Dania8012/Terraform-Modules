@@ -7,55 +7,8 @@ provider "aws" {
   }
 }
 
-resource "aws_iam_role" "build_project_role" {
-  name = "codebuild-service-role"
-  path = "/service-role/"
-
-  managed_policy_arns = ["arn:aws:iam::aws:policy/CloudWatchFullAccess"]
-
-  assume_role_policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Principal": {
-        "Service": "codebuild.amazonaws.com"
-      },
-      "Action": "sts:AssumeRole"
-    }
-  ]
-}
-EOF
-}
-
-
-resource "aws_codebuild_project" "build_project" {
-  name           = "Build-Project"
-  description    = "Build project for testing Terraform"
-  build_timeout  = "60"
-  queued_timeout = "480"
-
-  service_role = aws_iam_role.build_project_role.arn
-  source {
-    buildspec = file("./buildspec.yml")
-    type      = "CODEPIPELINE"
-  }
-
-  artifacts {
-    type = "CODEPIPELINE"
-  }
-
-  environment {
-    compute_type                = "BUILD_GENERAL1_SMALL"
-    image                       = "aws/codebuild/amazonlinux2-x86_64-standard:3.0"
-    type                        = "LINUX_CONTAINER"
-    image_pull_credentials_type = "CODEBUILD"
-  }
-}
-
 resource "aws_codepipeline" "codepipeline" {
-  name     = "test-pipeline"
+  name     = var.codepipeline_project_name
   role_arn = aws_iam_role.codepipeline_role.arn
 
   artifact_store {
@@ -76,8 +29,8 @@ resource "aws_codepipeline" "codepipeline" {
 
       configuration = {
         ConnectionArn    = aws_codestarconnections_connection.example.arn
-        FullRepositoryId = "Dania8012/argo-demo"
-        BranchName       = "master"
+        FullRepositoryId = format("%s/%s", var.github_user, var.repo_name)
+        BranchName       = var.branch_name
       }
     }
   }
@@ -95,7 +48,7 @@ resource "aws_codepipeline" "codepipeline" {
       version          = "1"
 
       configuration = {
-        ProjectName          = "Build-Project"
+        ProjectName          = var.codebuild_project_name
         EnvironmentVariables = "[{\"name\":\"MODULE_NAME\",\"value\":\"scm\",\"type\":\"PLAINTEXT\"}, {\"name\":\"COMMON\",\"value\":\"common\",\"type\":\"PLAINTEXT\"}]"
         PrimarySource        = "source_output"
       }
@@ -104,17 +57,17 @@ resource "aws_codepipeline" "codepipeline" {
 }
 
 resource "aws_codestarconnections_connection" "example" {
-  name          = "argo-demo"
+  name          = var.repo_name
   provider_type = "GitHub"
 }
 
 resource "aws_s3_bucket" "codepipeline_bucket" {
-  bucket = "codepipeline-data"
+  bucket = format("%s-data", var.codepipeline_project_name)
   acl    = "private"
 }
 
 resource "aws_iam_role" "codepipeline_role" {
-  name = "test-role"
+  name = format("%s-role", var.codepipeline_project_name)
 
   assume_role_policy = <<EOF
 {
@@ -133,7 +86,7 @@ EOF
 }
 
 resource "aws_iam_role_policy" "codepipeline_policy" {
-  name = "codepipeline_policy"
+  name = format("%s-policy", var.codepipeline_project_name)
   role = aws_iam_role.codepipeline_role.id
 
   policy = <<EOF
