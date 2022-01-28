@@ -5,6 +5,9 @@ phases:
       - echo intalling terraform 
       - apt update && apt install -y gnupg software-properties-common curl
       - curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add -
+      - apt update && apt install terraform
+      - echo verifying installation
+      - terraform -help
   build:
     commands:
       - echo Build started on `date`
