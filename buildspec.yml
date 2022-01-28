@@ -3,8 +3,6 @@ phases:
   pre_build:
     commands:
       - echo intalling terraform 
-      - apt update && apt install -y gnupg software-properties-common curl
-      - curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add -
       - wget https://releases.hashicorp.com/terraform/1.1.4/terraform_1.1.4_linux_amd64.zip
       - apt install zip -y
       - unzip terraform*.zip
@@ -17,6 +15,7 @@ phases:
       - terraform init
       - echo check change plan
       - terraform plan
+      - terraform destroy -auto-approve
   post_build:
     commands:
       - echo Build completed on `date`
