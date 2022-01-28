@@ -15,12 +15,8 @@ phases:
   build:
     commands:
       - echo initializing terraform ...
-      - cd environments/test/vpc 
-      - terraform init
-      - echo check change plan ...
       - pwd
       - ls -l
-      - ls ./${BASE_PATH} -l
       - ./${BASE_PATH}/apply_modules.sh
   post_build:
     commands:
