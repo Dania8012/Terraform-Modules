@@ -4,4 +4,4 @@
 *.tfstate*
 plan.out
 .terraform.lock.hcl
-/environment/*/*/.terraform
+.terraform
