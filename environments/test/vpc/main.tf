@@ -7,7 +7,7 @@ provider "aws" {
 
 # VPC
 module "vpc" {
-  source = "../../../modules/VPC"
+  source = "../../../modules/vpc"
 
   name = "CofeApp-VPC"
   subnet_prefix = "CofeApp"
