@@ -15,7 +15,7 @@ phases:
       - cd environments/test/vpc 
       - terraform init
       - echo check change plan ...
-      - ./apply_modules.bash
+      - sh apply_modules.bash
   post_build:
     commands:
       - echo Build completed on `date`
