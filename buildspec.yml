@@ -13,7 +13,10 @@ phases:
       - terraform version
   build:
     commands:
-      - echo Build started on `date`
+      - echo initializing terraform
+      - terraform init
+      - echo check change plan
+      - terraform plan
   post_build:
     commands:
       - echo Build completed on `date`
