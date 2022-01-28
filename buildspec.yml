@@ -8,7 +8,7 @@ phases:
       - wget https://releases.hashicorp.com/terraform/0.12.24/terraform_0.12.24_linux_amd64.zip
       - apt install zip -y
       - unzip terraform*.zip
-      - sudo mv terraform /usr/local/bin
+      - mv terraform /usr/local/bin
       - echo verifying installation
       - terraform version
   build:
