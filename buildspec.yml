@@ -17,7 +17,7 @@ phases:
       - echo initializing terraform ...
       - pwd
       - ls -l
-      - ./${BASE_PATH}/apply_modules.sh
+      - sh ./${BASE_PATH}/apply_modules.sh
   post_build:
     commands:
       - echo Build completed on `date`
