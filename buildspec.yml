@@ -12,10 +12,10 @@ phases:
   build:
     commands:
       - echo initializing terraform
+      - cd environments/test/vpc 
       - terraform init
       - echo check change plan
       - terraform plan
-      - terraform destroy -auto-approve
   post_build:
     commands:
       - echo Build completed on `date`
