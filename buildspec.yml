@@ -16,8 +16,7 @@ phases:
       - terraform init
       - echo check change plan
       - terraform plan
+      - terraform apply
   post_build:
     commands:
       - echo Build completed on `date`
-artifacts:
-  files: imagedefinitions.json
