@@ -3,7 +3,7 @@ phases:
   pre_build:
     commands:
       - echo intalling terraform 
-      - apt update && sudo apt-get install -y gnupg software-properties-common curl
+      - apt update && apt install -y gnupg software-properties-common curl
       - curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add -
   build:
     commands:
