@@ -4,7 +4,7 @@
 cd environments/test/vpc
 terraform init
 terraform plan
-terraform destroy -auto-approve
+terraform apply -auto-approve
 
 # create terraform CodeBuild project
 cd ../codebuild/terraform
