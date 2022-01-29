@@ -17,3 +17,8 @@ cd ../../codepipeline/terraform
 terraform init
 terraform plan
 terraform apply -auto-approve
+
+cd ../../rds
+terraform init
+terraform plan
+terraform apply -auto-approve
