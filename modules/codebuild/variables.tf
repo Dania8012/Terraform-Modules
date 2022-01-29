@@ -5,5 +5,5 @@ variable "build_project_name" {
 
 variable "build_project_description" {
   description = "The description text of the build project"
-  default = ""
+  default     = ""
 }

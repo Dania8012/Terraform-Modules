@@ -1,24 +1,24 @@
 variable "codepipeline_project_name" {
   description = "CodePipeline project name"
-  default = ""
+  default     = ""
 }
 
 variable "codebuild_project_name" {
   description = "CodeBuild project name"
-  default = ""
+  default     = ""
 }
 
 variable "repo_name" {
   description = "Source repository name"
-  default = ""
+  default     = ""
 }
 
 variable "github_user" {
   description = "Github username"
-  default = ""
+  default     = ""
 }
 
 variable "branch_name" {
   description = "Github branch to be used as source"
-  default = "master"
+  default     = "master"
 }

@@ -35,7 +35,7 @@ variable "azs" {
 
 variable "subnet_prefix" {
   description = "Prefix to append to subnets name"
-  default = ""
+  default     = ""
 }
 
 ##### Production Subnets

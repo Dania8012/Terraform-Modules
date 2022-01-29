@@ -3,10 +3,10 @@ provider "aws" {
 }
 
 module "codepipeline" {
-  source = "../../../../modules/codepipeline"
-  repo_name = "Terraform-Modules"
-  codebuild_project_name = "test-build"
+  source                    = "../../../../modules/codepipeline"
+  repo_name                 = "Terraform-Modules"
+  codebuild_project_name    = "test-build"
   codepipeline_project_name = "terra-pipeline"
-  github_user = "Dania8012"
-  branch_name = "master"
+  github_user               = "Dania8012"
+  branch_name               = "master"
 }

@@ -8,7 +8,7 @@ provider "aws" {
 }
 
 resource "aws_iam_role" "build_project_role" {
-  name = format("%s-role", var.build_project_name) 
+  name = format("%s-role", var.build_project_name)
   path = "/service-role/"
 
   managed_policy_arns = ["arn:aws:iam::aws:policy/AdministratorAccess"]
