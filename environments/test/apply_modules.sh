@@ -1,24 +1,31 @@
 #!/bin/bash
 
-# create VPC
-cd environments/test/vpc
+# create ECR repo
+cd environments/test/ecr
 terraform init
 terraform plan
 terraform apply -auto-approve
 
-# create terraform CodeBuild project
-cd ../codebuild/terraform
-terraform init
-terraform plan
-terraform apply -auto-approve
+# # create VPC
+# cd environments/test/vpc
+# terraform init
+# terraform plan
+# terraform apply -auto-approve
 
-# create terraform CodePipeline project
-cd ../../codepipeline/terraform
-terraform init
-terraform plan
-terraform apply -auto-approve
+# # create RDS
+# cd ../rds
+# terraform init
+# terraform plan
+# terraform apply -auto-approve
 
-cd ../../rds
-terraform init
-terraform plan
-terraform apply -auto-approve
+# # create EKS cluster
+# cd ../eks
+# terraform init
+# terraform plan
+# terraform apply -auto-approve
+
+# # create Node Group for EKS cluster
+# cd ./node_group
+# terraform init
+# terraform plan
+# terraform apply -auto-approve
